@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://01fe21bcs177:nM8bUYKCeNeC06xz@cluster0.m4kcjdd.mongodb.net/
+      database: Bus_tracker
