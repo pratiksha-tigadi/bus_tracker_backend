@@ -28,21 +28,21 @@ public class UserController {
             return new LoginResponse(false, "Invalid username or password");
         }
     }
-    @PostMapping("/register")
-    public ResponseEntity registerUser(@RequestBody AuthUser user){
+    @GetMapping ("/register")
+    public LoginResponse registerUser(@RequestBody AuthUser user){
         try {
             if (userRepository.findByUsername(user.getUsername()).isPresent()) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("Username already taken. Please try again.");
+                return new LoginResponse(true, "Username already taken. Please try again.");
             }
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
-            return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully.");
+            return new LoginResponse(true, "Successfully registered ");
         } catch (Exception e){
-            return ResponseEntity.internalServerError().body(e.getMessage());
+            return new LoginResponse(false, "Registration unsuccessfully ");
         }
     }
 
-    @PostMapping("/printUsers")
+    @GetMapping("/printUsers")
     public ResponseEntity<List<AuthUser>> printUsers() {
         List<AuthUser> users = userRepository.findAll();
         for (AuthUser user : users) {
