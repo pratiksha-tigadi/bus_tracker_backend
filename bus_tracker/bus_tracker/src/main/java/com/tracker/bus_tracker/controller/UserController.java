@@ -22,21 +22,27 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity registerUser(@RequestBody AuthUser user){
         try {
-            if (userRepository.findByUsername(user.getUsername()).isPresent())
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("Username already taken. Please try again");
+            if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("Username already taken. Please try again.");
+            }
+
+            if (userRepository.findByEmail(user.getEmail()).isPresent()) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("Email already taken. Please try again.");
+            }
+
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            AuthUser save = userRepository.save(user);
-            return ResponseEntity.ok(HttpStatus.CREATED);
+            userRepository.save(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body("User registered successfully.");
         } catch (Exception e){
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
 
     @PostMapping("/printUsers")
-    public ResponseEntity<List<AuthUser>> printUsers(){
+    public ResponseEntity<List<AuthUser>> printUsers() {
         List<AuthUser> users = userRepository.findAll();
         for (AuthUser user : users) {
-            System.out.println("User: " + user.getUsername() + ", Password: " + user.getPassword());
+            System.out.println("User: " + user.getUsername() + ", Email: " + user.getEmail() + ", Password: " + user.getPassword());
         }
         return ResponseEntity.ok(users);
     }
