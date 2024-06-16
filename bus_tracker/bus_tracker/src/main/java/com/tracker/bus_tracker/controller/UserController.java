@@ -32,13 +32,13 @@ public class UserController {
     public LoginResponse registerUser(@RequestBody AuthUser user){
         try {
             if (userRepository.findByUsername(user.getUsername()).isPresent()) {
-                return new LoginResponse(true, "Username already taken. Please try again.");
+                return new LoginResponse(false, "Username already taken. Please try again.");
             }
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
             return new LoginResponse(true, "Successfully registered ");
         } catch (Exception e){
-            return new LoginResponse(false, "Registration unsuccessfully ");
+            return new LoginResponse(false, e.getMessage());
         }
     }
 
