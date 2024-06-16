@@ -26,7 +26,6 @@ public class AuthUserDetailsService implements UserDetailsService {
             return User.builder()
                     .username(authUser.get().getUsername())
                     .password(authUser.get().getPassword())
-                    .disabled(!authUser.get().isActive())
                     .build();
         }
     }
