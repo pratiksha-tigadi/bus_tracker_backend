@@ -16,7 +16,7 @@ import java.util.concurrent.CompletableFuture;
 public class QRCodeService {
 
     private static final String API_HOST = "getqrcode.p.rapidapi.com";
-    private static final String API_KEY = "0300949659mshaad05a8d4cf0135p146d64jsn126ac5a12c8c";
+    private static final String API_KEY ="0300949659mshaad05a8d4cf0135p146d64jsn126ac5a12c8c";
 
     public CompletableFuture<Map<String, Object>> generateQRCode(String sourceCode, String destinationCode) {
         String uniqueKey = UUID.randomUUID().toString();
