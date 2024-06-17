@@ -20,7 +20,7 @@ public class SecurityConfig {
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/register", "/vbl","/all-buses","/vehicles", "/error", "/api/auth/login", "/buses", "/printUsers").permitAll()
+                        .requestMatchers("/api/auth/register","/generateQRCode", "/vbl","/all-buses","/vehicles", "/error", "/api/auth/login", "/buses", "/printUsers").permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .build();
