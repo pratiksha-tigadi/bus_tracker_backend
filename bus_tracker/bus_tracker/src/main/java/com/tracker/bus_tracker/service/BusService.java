@@ -58,8 +58,8 @@ public class BusService {
 
                 double randomAdjustment = random.nextDouble() * 0.15; // random number between 0.0 and 0.15
                 double estimatedTime = time1 + time2 + randomAdjustment;
-
-                BusWithEstimatedTimeDTO busDetailDTO = new BusWithEstimatedTimeDTO(bus, estimatedTime);
+                int capacity_filled = random.nextInt(10,55);
+                BusWithEstimatedTimeDTO busDetailDTO = new BusWithEstimatedTimeDTO(bus, estimatedTime,capacity_filled);
                 updatedBuses.add(busDetailDTO);
             }
         }
