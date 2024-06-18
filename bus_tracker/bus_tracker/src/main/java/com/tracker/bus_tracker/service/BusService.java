@@ -29,7 +29,7 @@ public class BusService {
 //    }
     public List<BusWithEstimatedTimeDTO> getBusesWithSourceAndDestination(String sourceCode, String destinationCode) {
         List<Buses> buses;
-        if (sourceCode.compareTo(destinationCode) > 0) {
+        if (sourceCode.compareTo(destinationCode) >= 0) {
             buses = busRepository.findBySourceCodeGreaterThan(sourceCode);
         } else {
             buses = busRepository.findBySourceCodeLessThan(sourceCode);
