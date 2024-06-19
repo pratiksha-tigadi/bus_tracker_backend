@@ -29,18 +29,21 @@ public class UserController {
         }
     }
     @GetMapping ("/register")
-    public LoginResponse registerUser(@RequestBody AuthUser user){
+    public LoginResponse registerUser(@RequestParam String username, @RequestParam String password){
+
         try {
-            if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+            if (userRepository.findByUsername(username).isPresent()) {
                 return new LoginResponse(false, "Username already taken. Please try again.");
             }
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            AuthUser user = new AuthUser(username, passwordEncoder.encode(password));
             userRepository.save(user);
-            return new LoginResponse(true, "Successfully registered ");
-        } catch (Exception e){
+            return new LoginResponse(true, "Successfully registered");
+        } catch (Exception e) {
             return new LoginResponse(false, e.getMessage());
         }
     }
+
+
 
     @GetMapping("/printUsers")
     public ResponseEntity<List<AuthUser>> printUsers() {

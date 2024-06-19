@@ -1,13 +1,21 @@
 package com.tracker.bus_tracker.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Setter
+@Getter
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Document("userauth")
 public class AuthUser {
     @Id
@@ -15,28 +23,10 @@ public class AuthUser {
     @Indexed
     private String username;
     private String password;
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
+    // Manually defined constructor to match usage
+    public AuthUser(String username, String password) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
         this.password = password;
     }
-
 }
