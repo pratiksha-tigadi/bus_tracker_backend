@@ -29,13 +29,14 @@ public class UserController {
         }
     }
     @GetMapping ("/register")
-    public LoginResponse registerUser(@RequestParam String username, @RequestParam String password){
+    public LoginResponse registerUser(@RequestParam String username, @RequestParam String password, @RequestParam Integer phone_no , @RequestParam String email){
 
         try {
             if (userRepository.findByUsername(username).isPresent()) {
                 return new LoginResponse(false, "Username already taken. Please try again.");
             }
-            AuthUser user = new AuthUser(username, passwordEncoder.encode(password));
+
+            AuthUser user = new AuthUser(username, passwordEncoder.encode(password),phone_no, email);
             userRepository.save(user);
             return new LoginResponse(true, "Successfully registered");
         } catch (Exception e) {

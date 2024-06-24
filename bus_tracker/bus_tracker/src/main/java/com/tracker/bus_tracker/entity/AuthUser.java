@@ -23,10 +23,15 @@ public class AuthUser {
     @Indexed
     private String username;
     private String password;
+    private Integer phone_no;
+    private String email;
+
 
     // Manually defined constructor to match usage
-    public AuthUser(String username, String password) {
+    public AuthUser(String username, String password, Integer phone_no ,String email) {
         this.username = username;
         this.password = password;
+        this.phone_no= phone_no;
+        this.email= email;
     }
 }
