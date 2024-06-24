@@ -29,7 +29,7 @@ public class UserController {
         }
     }
     @GetMapping ("/register")
-    public LoginResponse registerUser(@RequestParam String username, @RequestParam String password, @RequestParam Integer phone_no , @RequestParam String email){
+    public LoginResponse registerUser(@RequestParam String username, @RequestParam String password, @RequestParam String phone_no , @RequestParam String email){
 
         try {
             if (userRepository.findByUsername(username).isPresent()) {
