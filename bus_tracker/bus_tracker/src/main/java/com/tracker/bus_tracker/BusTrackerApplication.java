@@ -12,6 +12,5 @@ public class BusTrackerApplication {
 		SpringApplication.run(BusTrackerApplication.class, args);
 	}
 
-
 }
 
